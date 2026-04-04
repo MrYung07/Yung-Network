@@ -182,14 +182,15 @@ client.on('guildMemberAdd', async member => {
   const avatar = member.user.displayAvatarURL({ extension: 'png' });
 
   const embed = new EmbedBuilder()
-    .setTitle('👋 Benvenuto!')
-    .setDescription(`Benvenuto ${member} sel server`)
+    .setTitle('👋 Benvenuto/a in 🇮🇹 ErLama Network 🇮🇹!')
+    .setDescription(`Benvenuto ${member} sel server,
+      Vi ricoldo di verificati <#1476972204934692965>,
+      leggi le regole del server <#1451618095381614603>`)
     .setThumbnail(avatar)
-    .setColor('Blue');
+    .setColor('Rainbow');
 
   channel.send({ embeds: [embed] });
 });
-  const channel = member.guild.channels.cache.get('1451617430618247310');
 });
 // LOGIN
 require('dotenv').config();
