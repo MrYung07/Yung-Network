@@ -1,18 +1,16 @@
 const { Client, GatewayIntentBits, Collection, PermissionsBitField, ChannelType, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, StringSelectMenuBuilder } = require('discord.js');
 const fs = require('fs');
 // CREAZIONE CLIENT
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-client.commands = new Collection();
-
-//permss for bot
-const client = new Client({
-  intents: [
+const client = new Client({   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent
   ]
 });
+
+client.commands = new Collection();
+
 
 // CARICAMENTO COMANDI
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
