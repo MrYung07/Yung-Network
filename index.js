@@ -1,7 +1,7 @@
 const { Client, GatewayIntentBits, Collection, PermissionsBitField, ChannelType, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, StringSelectMenuBuilder } = require('discord.js');
 const fs = require('fs');
 // CREAZIONE CLIENT
-const client = new Client({   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages,GatewayIntentBits.MessageContent] });
+const client = new Client({   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages,GatewayIntentBits.MessageContent,] });
 client.commands = new Collection();
 
 // CARICAMENTO COMANDI
@@ -181,9 +181,9 @@ client.on('guildMemberAdd', async member => {
 
   const avatar = member.user.displayAvatarURL({ extension: 'png' });
 
-const embed = new EmbedBuilder()
-    .setTitle('👋 Benvenuto/a in 🇮🇹 ErLama Network 🇮🇹!')
-    .setDescription(`Benvenuto ${member} sel server Vi ricoldo di verificati <#1476972204934692965> leggi le regole del server <#1451618095381614603>`)
+  const embed = new EmbedBuilder()
+    .setTitle('👋 Benvenuto/a in 🇮🇹 ErLama Network 🇮🇹')
+    .setDescription(`Benvenuto ${member} sel server vi ricoldo di verificavi`)
     .setThumbnail(avatar)
     .setColor('Blue');
 
