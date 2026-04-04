@@ -57,7 +57,6 @@ client.on('interactionCreate', async interaction => {
   if (added.length) replyMessage += `✅ Ruoli aggiunti: ${added.join(', ')}\n`;
   if (removed.length) replyMessage += `⚠ Ruoli rimossi: ${removed.join(', ')}`;
 
-  await interaction.reply({ content: replyMessage || 'Nessuna modifica ai ruoli.', flags: 64 });
 });
 
 client.on('interactionCreate', async interaction => {
