@@ -183,7 +183,7 @@ client.on('guildMemberAdd', async member => {
 
   const embed = new EmbedBuilder()
     .setTitle('👋 Benvenuto/a in 🇮🇹 ErLama Network 🇮🇹')
-    .setDescription(`Benvenuto ${member} sel server vi ricoldo di verificavi`)
+    .setDescription(`Benvenuto ${member} sel server vi ricoldo di <#1476972204934692965>`)
     .setThumbnail(avatar)
     .setColor('Blue');
 
