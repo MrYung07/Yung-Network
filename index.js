@@ -1,7 +1,7 @@
 const { Client, GatewayIntentBits, Collection, PermissionsBitField, ChannelType, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, StringSelectMenuBuilder } = require('discord.js');
 const fs = require('fs');
 // CREAZIONE CLIENT
-const client = new Client({   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages,GatewayIntentBits.MessageContent,] });
+const client = new Client({   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages,GatewayIntentBits.MessageContent,GatewayIntentBits.GuildMembers,] });
 client.commands = new Collection();
 
 // CARICAMENTO COMANDI
@@ -166,31 +166,29 @@ if (!activeTickets) {
   }
 });
 
-client.on('guildMemberAdd', member => {
-const fs = require('fs');
-const { EmbedBuilder } = require('discord.js');
-
 client.on('guildMemberAdd', async member => {
-  const config = JSON.parse(fs.readFileSync('./welcomeConfig.json'));
+  const { EmbedBuilder } = require('discord.js');
 
+  const config = JSON.parse(fs.readFileSync('./welcomeConfig.json'));
   const guildConfig = config[member.guild.id];
   if (!guildConfig) return;
 
   const channel = member.guild.channels.cache.get(guildConfig.channelId);
   if (!channel) return;
 
-  const avatar = member.user.displayAvatarURL({ extension: 'png' });
+const background = "https://image2url.com/r2/default/images/1775389122263-7baed56e-97e8-4aa2-9b3b-3bc34e0a7436.blob";
+const avatar = member.user.displayAvatarURL({ extension: 'png', size: 512 });
 
-  const embed = new EmbedBuilder()
-    .setTitle('👋 Benvenuto/a in 🇮🇹 ErLama Network 🇮🇹')
-    .setDescription(`Benvenuto ${member} nel server vi ricoldo di <#1476972204934692965>`)
-    .setThumbnail(avatar)
+const image = `https://api.popcat.xyz/welcomecard?background=${encodeURIComponent(background)}&avatar=${encodeURIComponent(avatar)}&text1=${encodeURIComponent(member.user.username)}&text2=${encodeURIComponent("Benvenuto!")}&text3=${encodeURIComponent(`Membri: ${member.guild.memberCount}`)}`;
+  
+    const embed = new EmbedBuilder()
+    .setTitle('**👋 Benvenuto/a in 🇮🇹 ErLama Network 🇮🇹**')
+    .setDescription(`Ciao ${member}, benvenuto! nel server ti ricoldo di <#1476972204934692965>`)
+    .setImage(image)
     .setColor('Blue');
 
   channel.send({ embeds: [embed] });
 });
-  const channel = member.guild.channels.cache.get('1451617430618247310');
-});
-// LOGINn
+// LOGIN
 require('dotenv').config();
 client.login(process.env.TOKEN);
