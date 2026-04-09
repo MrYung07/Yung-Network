@@ -4,6 +4,10 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('annuncio')
     .setDescription('Invia un annuncio in un canale')
+    .addStringOption(option =>
+      option.setName('titolo')
+       .setDescription('titolo dell annucnio')
+       .setRequired(true))
     .addChannelOption(option =>
       option.setName('canale')
         .setDescription('Seleziona il canale dove inviare l’annuncio')
@@ -18,14 +22,14 @@ module.exports = {
     if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
       return interaction.reply({ content: '❌ Non hai i permessi per fare annunci!', flags: 64 });
     }
-
+    const titolo =interaction.options.getString('titolo');
     const canale = interaction.options.getChannel('canale');
     const messaggio = interaction.options.getString('messaggio');
 
     const embed = new EmbedBuilder()
-      .setTitle('📢 Annuncio')
+      .setTitle(titolo)
       .setDescription(messaggio)
-      .setColor('Blue')
+      .setColor('Purple')
       .setFooter({ text: `Annuncio inviato da ${interaction.user.tag}` })
       .setTimestamp();
 

@@ -1,49 +1,66 @@
-const { SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, ChannelType } = require('discord.js');
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('ticket')
-    .setDescription('Apri il pannello ticket'),
+    .setDescription('Crea un pannello ticket personalizzato')
+    .addStringOption(option =>
+      option.setName('titolo')
+        .setDescription('Titolo del pannello')
+        .setRequired(true))
+    .addStringOption(option =>
+      option.setName('descrizione')
+        .setDescription('Descrizione')
+        .setRequired(true))
+    .addStringOption(option =>
+      option.setName('emoji')
+        .setDescription('Emoji bottone (es: 🎫)')
+        .setRequired(true))
+    .addStringOption(option =>
+      option.setName('bottone')
+        .setDescription('Testo bottone')
+        .setRequired(true))
+    .addChannelOption(option =>
+      option.setName('categoria')
+        .setDescription('Categoria dove creare i ticket')
+        .addChannelTypes(ChannelType.GuildCategory)
+        .setRequired(true))
+    .addRoleOption(option =>
+      option.setName('staff')
+        .setDescription('Ruolo staff')
+        .setRequired(true)),
 
   async execute(interaction) {
 
+    if (!interaction.member.permissions.has('Administrator')) {
+      return interaction.reply({ content: '❌ Non hai permessi!', ephemeral: true });
+    }
+
+    const titolo = interaction.options.getString('titolo');
+    const descrizione = interaction.options.getString('descrizione');
+    const emoji = interaction.options.getString('emoji');
+    const testoBottone = interaction.options.getString('bottone');
+    const categoria = interaction.options.getChannel('categoria');
+    const staffRole = interaction.options.getRole('staff');
+
     const embed = new EmbedBuilder()
-      .setTitle('🎫 Sistema Ticket | 🇮🇹 ErLama Network 🇮🇹')
-        .setDescription(`
-        Ciao! Se hai bisogno di assistenza, seleziona la categoria più adatta qui sotto 👇
-        🎧 **Supporto** → Per problemi, dubbi o segnalazioni
-        🤝 **Partnership** → Per collaborazioni con altri server
-        🛠️ **Candidatura Staff**
-        `)
-        .setColor('Blue')
-        .setFooter({ text: `Bot Sviluppato da MrYung07 | 🇮🇹 ErLama Network 🇮🇹`}); 
+      .setTitle(titolo)
+      .setDescription(descrizione)
+      .setColor('Purple');
 
-    const menu = new StringSelectMenuBuilder()
-      .setCustomId('ticket_select')
-      .setPlaceholder('🎟️ Sistema Ticket 🎟️')
-      .addOptions([
-        {
-          label: '🎧 Supporto',
-          description: 'Per problemi, dubbi o segnalazioni',
-          value: 'support'
-        },
-        {
-          label: '🤝 Partnership',
-          description: 'Per collaborazioni con il server',
-          value: 'Partnership'
-        },
-        {
-          label: '🛠️ Candidatura Staff',
-          description: 'diventa staff',
-          value: 'staff'
-        }
-      ]);
+    const button = new ButtonBuilder()
+      .setCustomId(`create_ticket_${categoria.id}_${staffRole.id}`)
+      .setLabel(testoBottone)
+      .setStyle(ButtonStyle.Primary)
+      .setEmoji(emoji);
 
-    const row = new ActionRowBuilder().addComponents(menu);
+    const row = new ActionRowBuilder().addComponents(button);
 
-    await interaction.reply({
+    await interaction.reply({ content: '✅ Pannello creato!', ephemeral: true });
+
+    await interaction.channel.send({
       embeds: [embed],
-      components: [row],
+      components: [row]
     });
   }
 };
