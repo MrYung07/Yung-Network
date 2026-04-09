@@ -94,10 +94,10 @@ client.on('interactionCreate', async interaction => {
     try {
       if (member.roles.cache.has(roleId)) {
         await member.roles.remove(roleId);
-        action = 'stato rimosso';
+        action = 'rimosso';
       } else {
         await member.roles.add(roleId);
-        action = 'stato aggiunto';
+        action = 'aggiunto';
       }
 
       // Risposta utente
@@ -105,7 +105,7 @@ client.on('interactionCreate', async interaction => {
         await interaction.reply({
           embeds: [{
             color: action === 'aggiunto' ? 0x00ff00 : 0xff0000,
-            description: `${action === 'aggiunto' ? '✅' : '❌'} Ruolo **${role}** e ${action}`
+            description: `${action === 'aggiunto' ? '✅' : '❌'} Ruolo **${role}** e stato ${action}`
           }],
           ephemeral: true
         }).catch(() => {});
