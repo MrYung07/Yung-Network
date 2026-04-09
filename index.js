@@ -94,10 +94,10 @@ client.on('interactionCreate', async interaction => {
     try {
       if (member.roles.cache.has(roleId)) {
         await member.roles.remove(roleId);
-        action = 'rimosso';
+        action = 'stato rimosso';
       } else {
         await member.roles.add(roleId);
-        action = 'aggiunto';
+        action = 'stato aggiunto';
       }
 
       // Risposta utente
