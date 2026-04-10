@@ -46,10 +46,6 @@ async execute(interaction) {
 
     row.addComponents(btn);
 
-    if ((i + 1) % 5 === 0 || i === guildRoles.length - 1) {
-      rows.push(row);
-      row = new ActionRowBuilder();
-    }
   });
 
   const embed = new EmbedBuilder()
