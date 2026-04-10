@@ -74,7 +74,7 @@ async function checkLive(client, force = false) {
       lastLive = true;
 
       const embed = new EmbedBuilder()
-        .setTitle(`🔴 ${stream.user_name} è in LIVE!`)
+        .setTitle(`Ciao sono ${stream.user_name} è adesso sonoin LIVE su Twitvh:twitch:!`)
         .setURL(`https://twitch.tv/${STREAMER}`)
         .setDescription(stream.title)
         .addFields(

@@ -133,6 +133,32 @@ client.on('interactionCreate', async interaction => {
     }
   }
 });
+// 📩 MODAL PARTNER
+if (interaction.isModalSubmit() && interaction.customId === 'partner_modal') {
+
+  const nome = interaction.fields.getTextInputValue('nome');
+  const menzione = interaction.fields.getTextInputValue('menzione');
+  const bio = interaction.fields.getTextInputValue('bio');
+  const invito = interaction.fields.getTextInputValue('invito');
+
+  const embed = new EmbedBuilder()
+    .setTitle(`🤝 Partner con ${nome}`)
+    .setDescription(
+      `📢 **Partner Richiesta da:** ${menzione}\n\n` +
+      `📝 **Descrizione:**\n${bio}\n\n` +
+      `🔗 **Invito:** ${invito}\n\n` +
+      `🤝 **Fatta da:** ${interaction.user}`
+    )
+    .setColor('Purple')
+    .setTimestamp();
+
+  await interaction.reply({
+    content: '✅ Partner creato!',
+    ephemeral: true
+  });
+
+  await interaction.channel.send({ embeds: [embed] });
+}
 //ticket
 if (interaction.isButton() && interaction.customId.startsWith('create_ticket_')) {
 
