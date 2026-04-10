@@ -112,18 +112,6 @@ client.on('interactionCreate', async interaction => {
         }).catch(() => {});
       }
 
-      // Log su canale
-      const logChannel = interaction.guild.channels.cache.get(LOG_CHANNEL_ID);
-      if (logChannel) {
-        logChannel.send({
-          embeds: [{
-            title: '📜 Log Ruoli',
-            color: 0x2f3136,
-            description: `👤 Utente: ${interaction.user.tag}\n🎭 Ruolo: ${role}\n📌 Azione: ${action}`,
-            timestamp: new Date()
-          }]
-        }).catch(() => {});
-      }
 
     } catch (err) {
       console.error(err);
