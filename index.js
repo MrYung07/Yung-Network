@@ -206,7 +206,7 @@ client.on('guildMemberAdd', async member => {
   const channel = member.guild.channels.cache.get(guildConfig.channelId);
   if (!channel) return;
 
-  const background = "https://image2url.com/r2/default/images/1775817648114-d63127dd-4c39-4566-8ecb-9db13b6ba689.png"; // URL valido
+  const background = "https://image2url.com/r2/default/images/1775819181786-140f09cc-6d87-4e8b-bb11-473cd2516b5f.png"; // URL valido
   const avatar = member.user.displayAvatarURL({ extension: 'png', size: 512 });
   const image = `https://api.popcat.xyz/welcomecard?background=${encodeURIComponent(background)}&avatar=${encodeURIComponent(avatar)}&text1=${encodeURIComponent(member.user.username)}&text2=${encodeURIComponent("Benvenuto!")}&text3=${encodeURIComponent(`Membri: ${member.guild.memberCount}`)}`;
 
