@@ -1,33 +1,40 @@
 const { EmbedBuilder } = require('discord.js');
 const axios = require('axios');
 
-// CONFIG
 const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
 const TWITCH_CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
 
-const STREAMER = 'mryung07';
+const STREAMER = 'mryung07'; // es: yungt
 const CHANNEL_ID = '1476526624085250049';
-const ROLE_ID = '1476526581810728970'; // 👈 ruolo da pingare
+const ROLE_ID = '1476526581810728970';
 
 let accessToken = null;
 let lastLive = false;
 
 // 🔹 TOKEN
 async function getAccessToken() {
-  const res = await axios.post(`https://id.twitch.tv/oauth2/token`, null, {
-    params: {
-      client_id: TWITCH_CLIENT_ID,
-      client_secret: TWITCH_CLIENT_SECRET,
-      grant_type: 'client_credentials'
-    }
-  });
+  try {
+    const res = await axios.post(`https://id.twitch.tv/oauth2/token`, null, {
+      params: {
+        client_id: TWITCH_CLIENT_ID,
+        client_secret: TWITCH_CLIENT_SECRET,
+        grant_type: 'client_credentials'
+      }
+    });
 
-  accessToken = res.data.access_token;
+    accessToken = res.data.access_token;
+    console.log("✅ Token Twitch OK");
+  } catch (err) {
+    console.error("❌ ERRORE TOKEN:", err.response?.data || err.message);
+  }
 }
 
 // 🔹 CHECK LIVE
 async function checkLive(client, force = false) {
+  console.log("🔍 Controllo live...");
+
   if (!accessToken) await getAccessToken();
+  if (!accessToken) return console.log("❌ Nessun token");
 
   try {
     const res = await axios.get(`https://api.twitch.tv/helix/streams`, {
@@ -40,47 +47,64 @@ async function checkLive(client, force = false) {
       }
     });
 
+    console.log("📡 RISPOSTA TWITCH:", res.data);
+
     const channel = client.channels.cache.get(CHANNEL_ID);
-    if (!channel) return;
+    if (!channel) return console.log("❌ Canale non trovato");
 
-    if (res.data.data.length > 0) {
-      const stream = res.data.data[0];
-
-      if (!lastLive || force) {
-        lastLive = true;
-
-        const embed = new EmbedBuilder()
-          .setTitle(`🔴 ${stream.user_name} è in LIVE!`)
-          .setURL(`https://twitch.tv/${STREAMER}`)
-          .setDescription(stream.title)
-          .addFields(
-            { name: '🎮 Gioco', value: stream.game_name || 'Nessuno', inline: true },
-            { name: '👀 Viewers', value: stream.viewer_count.toString(), inline: true }
-          )
-          .setImage(stream.thumbnail_url.replace('{width}', '1280').replace('{height}', '720'))
-          .setColor('Purple')
-          .setTimestamp();
-
-        channel.send({
-          content: `<@&${ROLE_ID}> 🚨 **LIVE ORA!** https://twitch.tv/${STREAMER}`, // 👈 PING
-          embeds: [embed]
-        });
-      }
-
-    } else {
+    // 🔥 SE OFFLINE
+    if (res.data.data.length === 0) {
+      console.log("⚫ Offline");
       lastLive = false;
+
+      if (!force) return;
+    }
+
+    // 🔥 PRENDI DATI (anche fake se test)
+    const stream = res.data.data[0] || {
+      user_name: STREAMER,
+      title: "TEST LIVE",
+      game_name: "Just Chatting",
+      viewer_count: 999,
+      thumbnail_url: "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + STREAMER + "-1280x720.jpg"
+    };
+
+    // 🔥 INVIO
+    if (!lastLive || force) {
+      lastLive = true;
+
+      const embed = new EmbedBuilder()
+        .setTitle(`🔴 ${stream.user_name} è in LIVE!`)
+        .setURL(`https://twitch.tv/${STREAMER}`)
+        .setDescription(stream.title)
+        .addFields(
+          { name: '🎮 Gioco', value: stream.game_name, inline: true },
+          { name: '👀 Viewers', value: stream.viewer_count.toString(), inline: true }
+        )
+        .setImage(stream.thumbnail_url.replace('{width}', '1280').replace('{height}', '720'))
+        .setColor('Purple')
+        .setTimestamp();
+
+      await channel.send({
+        content: `<@&${ROLE_ID}> 🚨 LIVE ORA!`,
+        embeds: [embed]
+      });
+
+      console.log("✅ NOTIF INVIATA");
     }
 
   } catch (err) {
-    console.error('Errore Twitch:', err.message);
+    console.error("❌ ERRORE TWITCH:", err.response?.data || err.message);
   }
 }
 
-// 🔹 LOOP
+// 🔁 LOOP
 function startTwitchNotifier(client) {
+  console.log("🚀 Twitch notifier avviato");
+
   setInterval(() => {
     checkLive(client);
-  }, 60000); // ogni 60 sec
+  }, 60000);
 }
 
 module.exports = { startTwitchNotifier, checkLive };

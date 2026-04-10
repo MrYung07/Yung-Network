@@ -1,27 +1,18 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
+const { checkLive } = require('./twitchnotif');
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('testlive')
-    .setDescription('Testa la notifica Twitch'),
+    .setDescription('Test live Twitch'),
 
   async execute(interaction) {
 
-    const embed = new EmbedBuilder()
-      .setTitle('🔴 STREAMER è in LIVE!')
-      .setURL('https://twitch.tv/tuonome')
-      .setDescription('Questo è un test della live 🚀')
-      .addFields(
-        { name: '🎮 Gioco', value: 'Just Chatting', inline: true },
-        { name: '👀 Viewers', value: '999', inline: true }
-      )
-      .setColor('Purple')
-      .setTimestamp();
+    await interaction.deferReply({ ephemeral: true });
 
-    await interaction.reply({
-      content: `<@&ID_RUOLO> 🚨 LIVE ORA!`,
-      embeds: [embed]
-    });
+    await checkLive(interaction.client, true); // 👈 ORA È DENTRO async
+
+    await interaction.editReply({ content: '✅ Test live inviato!' });
 
   }
 };

@@ -29,6 +29,7 @@ const { startTwitchNotifier } = require('./commands/twitchnotif');
 
 client.once('clientReady', () => {
   console.log(`✅ Bot online come ${client.user.tag}`);
+  startTwitchNotifier(client);
   client.user.setPresence({
     activities: [{ name: '/help | Yung Network🤖', type: 3 }],
     status: 'online'
