@@ -74,9 +74,9 @@ async function checkLive(client, force = false) {
       lastLive = true;
 
       const embed = new EmbedBuilder()
-        .setTitle(`Ciao sono ${stream.user_name} è adesso sonoin LIVE su Twitvh:twitch:!`)
+        .setTitle(stream.title)
         .setURL(`https://twitch.tv/${STREAMER}`)
-        .setDescription(stream.title)
+        .setDescription('Fate un salto')
         .addFields(
           { name: '🎮 Gioco', value: stream.game_name, inline: true },
           { name: '👀 Viewers', value: stream.viewer_count.toString(), inline: true }
@@ -86,7 +86,7 @@ async function checkLive(client, force = false) {
         .setTimestamp();
 
       await channel.send({
-        content: `<@&${ROLE_ID}> 🚨 LIVE ORA!`,
+        content: `:twitch:<@&${ROLE_ID}> 🚨 SONO IN LIVE ORA!`,
         embeds: [embed]
       });
 

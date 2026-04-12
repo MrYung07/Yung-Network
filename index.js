@@ -197,7 +197,7 @@ if (interaction.isButton() && interaction.customId.startsWith('create_ticket_'))
 
   await interaction.reply({
     content: `✅ Ticket creato: ${channel}`,
-    ephemeral: true
+    flags : 64
   });
 }
   // Bottone chiudi ticket
