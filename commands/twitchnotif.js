@@ -86,7 +86,7 @@ async function checkLive(client, force = false) {
         .setTimestamp();
 
       await channel.send({
-        content: `:twitch:<@&${ROLE_ID}> 🚨 SONO IN LIVE ORA!`,
+        content: `<:twitch:1488681906101944330><@&${ROLE_ID}> 🚨 SONO IN LIVE ORA!`,
         embeds: [embed]
       });
 
