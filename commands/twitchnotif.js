@@ -4,7 +4,7 @@ const axios = require('axios');
 const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
 const TWITCH_CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
 
-const STREAMER = 'mryung07'; // es: yungt
+const STREAMER = 'mryung07'; 
 const CHANNEL_ID = '1476526624085250049';
 const ROLE_ID = '1476526581810728970';
 
@@ -76,7 +76,7 @@ async function checkLive(client, force = false) {
       const embed = new EmbedBuilder()
         .setTitle(stream.title)
         .setURL(`https://twitch.tv/${STREAMER}`)
-        .setDescription('Fate un salto')
+        .setDescription('')
         .addFields(
           { name: '🎮 Gioco', value: stream.game_name, inline: true },
           { name: '👀 Viewers', value: stream.viewer_count.toString(), inline: true }
@@ -86,7 +86,7 @@ async function checkLive(client, force = false) {
         .setTimestamp();
 
       await channel.send({
-        content: `<:twitch:1488681906101944330><@&${ROLE_ID}> 🚨 SONO IN LIVE ORA!`,
+        content: `<:twitch:1488681906101944330>hay <@&${ROLE_ID}> Mi Trovate in live Venite a fare un salto🚨!`,
         embeds: [embed]
       });
 
