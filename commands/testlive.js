@@ -6,13 +6,33 @@ module.exports = {
     .setName('testlive')
     .setDescription('Test live Twitch'),
 
-  async execute(interaction) {
+async execute(interaction) {
 
-    await interaction.deferReply({ ephemeral: true });
+  console.log("🚀 testlive eseguito");
 
-    await checkLive(interaction.client, true); // 👈 ORA È DENTRO async
-
-    await interaction.editReply({ content: '✅ Test live inviato!' });
-
+  // 🔒 blocco totale doppie risposte
+  if (interaction.replied || interaction.deferred) {
+    console.log("⚠️ Interaction già usata");
+    return;
   }
+
+  await interaction.deferReply({ ephemeral: true });
+
+  try {
+    await checkLive(interaction.client, true);
+
+    await interaction.editReply({
+      content: '✅ Test live inviato!'
+    });
+
+  } catch (err) {
+    console.error(err);
+
+    if (!interaction.replied) {
+      await interaction.editReply({
+        content: '❌ Errore durante il test live'
+      });
+    }
+  }
+}
 };

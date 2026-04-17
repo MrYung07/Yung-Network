@@ -43,174 +43,201 @@ const guildConfig = {
   }
 };
 
-// ✅ HANDLER UNICO PER INTERACTIONS (SLASH + BUTTON)
 client.on('interactionCreate', async interaction => {
   if (!interaction.guild) return;
 
-  // 🔹 SLASH COMMAND
-  if (interaction.isChatInputCommand()) {
-    const command = client.commands.get(interaction.commandName);
-    if (!command) return;
-    try { 
-      await command.execute(interaction); 
-    } catch (err) { 
-      console.error(err); 
-      if (!interaction.replied) await interaction.reply({ content: '⚠ Errore interno!', ephemeral: true }).catch(() => {});
-    }
-  }
-const { ActionRowBuilder, ButtonBuilder } = require('discord.js');
+  try {
 
-const rolesPath = path.join(__dirname, 'roles.json'); 
-const cooldown = new Set();
+    // ======================
+    // 🔹 SLASH COMMAND
+    // ======================
+    if (interaction.isChatInputCommand()) {
+      const command = client.commands.get(interaction.commandName);
+      if (!command) return;
 
-client.on('interactionCreate', async interaction => {
-  if (!interaction.isButton()) return;
-
-  const userId = interaction.user.id;
-
-  // Anti-spam
-  if (cooldown.has(userId)) {
-    return interaction.reply({ content: '⏳ Aspetta!', ephemeral: true }).catch(() => {});
-  }
-  cooldown.add(userId);
-  setTimeout(() => cooldown.delete(userId), 1500);
-
-  // Lettura ruoli
-  const data = fs.existsSync(rolesPath) ? JSON.parse(fs.readFileSync(rolesPath, 'utf8')) : {};
-  const guildRoles = data[interaction.guild.id];
-  if (!guildRoles) return;
-
-  // Gestione click su ruolo
-  if (interaction.customId.startsWith('role_')) {
-    const roleId = interaction.customId.replace('role_', '');
-    const role = interaction.guild.roles.cache.get(roleId);
-    const member = interaction.member;
-
-    if (!role) return interaction.reply({ content: '⚠ Ruolo non trovato.', ephemeral: true }).catch(() => {});
-    if (role.position >= interaction.guild.members.me.roles.highest.position) {
-      return interaction.reply({ content: '⚠ Ruolo troppo alto.', ephemeral: true }).catch(() => {});
+      await command.execute(interaction);
     }
 
-    let action = '';
-    try {
-      if (member.roles.cache.has(roleId)) {
-        await member.roles.remove(roleId);
-        action = 'rimosso';
-      } else {
-        await member.roles.add(roleId);
-        action = 'aggiunto';
+    // ======================
+    // 🔹 BUTTON
+    // ======================
+    else if (interaction.isButton()) {
+
+      const userId = interaction.user.id;
+
+      // 🔸 ANTI-SPAM
+      if (!global.cooldown) global.cooldown = new Set();
+      if (global.cooldown.has(userId)) {
+        return interaction.reply({ content: '⏳ Aspetta!', ephemeral: true }).catch(() => {});
       }
+      global.cooldown.add(userId);
+      setTimeout(() => global.cooldown.delete(userId), 1500);
 
-      // Risposta utente
-      if (!interaction.replied) {
+      // ======================
+      // 🎭 RUOLI BUTTON
+      // ======================
+      if (interaction.customId.startsWith('role_')) {
+
+        const rolesPath = path.join(__dirname, 'roles.json');
+        const data = fs.existsSync(rolesPath)
+          ? JSON.parse(fs.readFileSync(rolesPath, 'utf8'))
+          : {};
+
+        const guildRoles = data[interaction.guild.id];
+        if (!guildRoles) return;
+
+        const roleId = interaction.customId.replace('role_', '');
+        const role = interaction.guild.roles.cache.get(roleId);
+        const member = interaction.member;
+
+        if (!role) {
+          return interaction.reply({ content: '⚠ Ruolo non trovato.', ephemeral: true });
+        }
+
+        if (role.position >= interaction.guild.members.me.roles.highest.position) {
+          return interaction.reply({ content: '⚠ Ruolo troppo alto.', ephemeral: true });
+        }
+
+        let action = '';
+
+        if (member.roles.cache.has(roleId)) {
+          await member.roles.remove(roleId);
+          action = 'rimosso';
+        } else {
+          await member.roles.add(roleId);
+          action = 'aggiunto';
+        }
+
         await interaction.reply({
           embeds: [{
             color: action === 'aggiunto' ? 0x00ff00 : 0xff0000,
-            description: `${action === 'aggiunto' ? '✅' : '❌'} Ruolo **${role}** e stato ${action}`
+            description: `${action === 'aggiunto' ? '✅' : '❌'} Ruolo **${role.name}** ${action}`
           }],
           ephemeral: true
-        }).catch(() => {});
+        });
       }
 
+      // ======================
+      // 🎫 CREA TICKET
+      // ======================
+      else if (interaction.customId.startsWith('create_ticket_')) {
 
-    } catch (err) {
-      console.error(err);
-      if (!interaction.replied) {
-        await interaction.reply({ content: '⚠ Errore, controlla i permessi.', ephemeral: true }).catch(() => {});
+        const parts = interaction.customId.split('_');
+        const categoryId = parts[2];
+        const staffRoleId = parts[3];
+
+        let tickets = ticketsPerGuild.get(interaction.guild.id);
+        if (!tickets) {
+          tickets = new Map();
+          ticketsPerGuild.set(interaction.guild.id, tickets);
+        }
+
+        if (tickets.has(interaction.user.id)) {
+          return interaction.reply({ content: "Hai già un ticket aperto!", ephemeral: true });
+        }
+
+        const channel = await interaction.guild.channels.create({
+          name: `ticket-${interaction.user.username}`.toLowerCase().replace(/[^a-z0-9-]/g, ''),
+          type: ChannelType.GuildText,
+          parent: categoryId,
+          permissionOverwrites: [
+            { id: interaction.guild.id, deny: ['ViewChannel'] },
+            { id: interaction.user.id, allow: ['ViewChannel', 'SendMessages'] },
+            { id: staffRoleId, allow: ['ViewChannel', 'SendMessages', 'ReadMessageHistory'] }
+          ]
+        });
+
+        tickets.set(interaction.user.id, channel.id);
+
+        const closeBtn = new ButtonBuilder()
+          .setCustomId('close_ticket')
+          .setLabel('Chiudi Ticket')
+          .setStyle(ButtonStyle.Danger);
+
+        const row = new ActionRowBuilder().addComponents(closeBtn);
+
+        const embed = new EmbedBuilder()
+          .setTitle('🎫 Ticket')
+          .setDescription('Aspetta che uno Staff ti risponderà.')
+          .setColor('Purple');
+
+        await channel.send({
+          content: `${interaction.user}`,
+          embeds: [embed],
+          components: [row]
+        });
+
+        await interaction.reply({
+          content: `✅ Ticket creato: ${channel}`,
+          ephemeral: true
+        });
       }
+
+      // ======================
+      // 🔒 CHIUDI TICKET
+      // ======================
+      else if (interaction.customId === 'close_ticket') {
+
+        const tickets = ticketsPerGuild.get(interaction.guild.id);
+        if (!tickets) return;
+
+        const userId = [...tickets.entries()]
+          .find(([_, id]) => id === interaction.channel.id)?.[0];
+
+        if (userId) tickets.delete(userId);
+
+        await interaction.reply({
+          content: '🔒 Chiusura ticket in 3 secondi...',
+          ephemeral: true
+        });
+
+        setTimeout(() => interaction.channel.delete().catch(() => {}), 3000);
+      }
+    }
+
+    // ======================
+    // 📩 MODAL
+    // ======================
+    else if (interaction.isModalSubmit()) {
+
+      if (interaction.customId === 'partner_modal') {
+
+        const nome = interaction.fields.getTextInputValue('nome');
+        const menzione = interaction.fields.getTextInputValue('menzione');
+        const bio = interaction.fields.getTextInputValue('bio');
+        const invito = interaction.fields.getTextInputValue('invito');
+
+        const embed = new EmbedBuilder()
+          .setTitle(`🤝 Partner con ${nome}`)
+          .setDescription(
+            `📢 **Partner Richiesta da:** ${menzione}\n\n` +
+            `📝 **Descrizione:**\n${bio}\n\n` +
+            `🔗 **Invito:** ${invito}\n\n` +
+            `🤝 **Fatta da:** ${interaction.user}`
+          )
+          .setColor('Purple')
+          .setTimestamp();
+
+        await interaction.reply({
+          content: '✅ Partner creato!',
+          ephemeral: true
+        });
+
+        await interaction.channel.send({ embeds: [embed] });
+      }
+    }
+
+  } catch (err) {
+    console.error("❌ ERRORE INTERACTION:", err);
+
+    if (!interaction.replied && !interaction.deferred) {
+      await interaction.reply({
+        content: '⚠ Errore interno!',
+        ephemeral: true
+      }).catch(() => {});
     }
   }
 });
-// 📩 MODAL PARTNER
-if (interaction.isModalSubmit() && interaction.customId === 'partner_modal') {
-
-  const nome = interaction.fields.getTextInputValue('nome');
-  const menzione = interaction.fields.getTextInputValue('menzione');
-  const bio = interaction.fields.getTextInputValue('bio');
-  const invito = interaction.fields.getTextInputValue('invito');
-
-  const embed = new EmbedBuilder()
-    .setTitle(`🤝 Partner con ${nome}`)
-    .setDescription(
-      `📢 **Partner Richiesta da:** ${menzione}\n\n` +
-      `📝 **Descrizione:**\n${bio}\n\n` +
-      `🔗 **Invito:** ${invito}\n\n` +
-      `🤝 **Fatta da:** ${interaction.user}`
-    )
-    .setColor('Purple')
-    .setTimestamp();
-
-  await interaction.reply({
-    content: '✅ Partner creato!',
-    ephemeral: true
-  });
-
-  await interaction.channel.send({ embeds: [embed] });
-}
-//ticket
-if (interaction.isButton() && interaction.customId.startsWith('create_ticket_')) {
-
-  const parts = interaction.customId.split('_');
-  const categoryId = parts[2];
-  const staffRoleId = parts[3];
-
-  let tickets = ticketsPerGuild.get(interaction.guild.id);
-  if (!tickets) {
-    tickets = new Map();
-    ticketsPerGuild.set(interaction.guild.id, tickets);
-  }
-
-  if (tickets.has(interaction.user.id)) {
-    return interaction.reply({ content: "Hai già un ticket aperto!", ephemeral: true });
-  }
-
-  const channel = await interaction.guild.channels.create({
-    name: `ticket-${interaction.user.username}`.toLowerCase().replace(/[^a-z0-9-]/g, ''),
-    type: ChannelType.GuildText,
-    parent: categoryId,
-    permissionOverwrites: [
-      { id: interaction.guild.id, deny: ['ViewChannel'] },
-      { id: interaction.user.id, allow: ['ViewChannel', 'SendMessages'] },
-      { id: staffRoleId, allow: ['ViewChannel', 'SendMessages', 'ReadMessageHistory'] }
-    ]
-  });
-
-  tickets.set(interaction.user.id, channel.id);
-
-  const closeBtn = new ButtonBuilder()
-    .setCustomId('close_ticket')
-    .setLabel('Chiudi Ticket')
-    .setStyle(ButtonStyle.Danger);
-
-  const row = new ActionRowBuilder().addComponents(closeBtn);
-
-  const embed = new EmbedBuilder()
-    .setTitle('🎫 Ticket')
-    .setDescription('Aspetta che uno Staff ti risponderà.')
-    .setColor('Purple');
-
-  await channel.send({
-    content: `${interaction.user}`,
-    embeds: [embed],
-    components: [row]
-  });
-
-  await interaction.reply({
-    content: `✅ Ticket creato: ${channel}`,
-    flags : 64
-  });
-}
-  // Bottone chiudi ticket
-  if (interaction.isButton() && interaction.customId === 'close_ticket') {
-    const tickets = ticketsPerGuild.get(interaction.guild.id);
-    if (!tickets) return;
-    const userId = [...tickets.entries()].find(([_, id]) => id === interaction.channel.id)?.[0];
-    if (userId) tickets.delete(userId);
-    await interaction.reply({ content: '🔒 Chiusura ticket in 3 secondi...', ephemeral: true });
-    setTimeout(() => interaction.channel.delete(), 3000);
-  }
-});
-
 
 // Welcome DM con URL valido
 client.on('guildMemberAdd', async member => {

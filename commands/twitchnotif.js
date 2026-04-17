@@ -4,12 +4,13 @@ const axios = require('axios');
 const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
 const TWITCH_CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
 
-const STREAMER = 'mryung07'; 
+const STREAMER = 'mryung07';
 const CHANNEL_ID = '1476526624085250049';
 const ROLE_ID = '1476526581810728970';
 
 let accessToken = null;
 let lastLive = false;
+let tokenExpire = 0;
 
 // 🔹 TOKEN
 async function getAccessToken() {
@@ -23,7 +24,10 @@ async function getAccessToken() {
     });
 
     accessToken = res.data.access_token;
+    tokenExpire = Date.now() + (res.data.expires_in * 1000);
+
     console.log("✅ Token Twitch OK");
+
   } catch (err) {
     console.error("❌ ERRORE TOKEN:", err.response?.data || err.message);
   }
@@ -33,8 +37,12 @@ async function getAccessToken() {
 async function checkLive(client, force = false) {
   console.log("🔍 Controllo live...");
 
-  if (!accessToken) await getAccessToken();
-  if (!accessToken) return console.log("❌ Nessun token");
+  // 🔄 refresh token se scaduto
+  if (!accessToken || Date.now() > tokenExpire) {
+    await getAccessToken();
+  }
+
+  if (!accessToken) return;
 
   try {
     const res = await axios.get(`https://api.twitch.tv/helix/streams`, {
@@ -42,56 +50,52 @@ async function checkLive(client, force = false) {
         'Client-ID': TWITCH_CLIENT_ID,
         'Authorization': `Bearer ${accessToken}`
       },
-      params: {
-        user_login: STREAMER
-      }
+      params: { user_login: STREAMER }
     });
-
-    console.log("📡 RISPOSTA TWITCH:", res.data);
 
     const channel = client.channels.cache.get(CHANNEL_ID);
     if (!channel) return console.log("❌ Canale non trovato");
 
-    // 🔥 SE OFFLINE
-    if (res.data.data.length === 0) {
+    const isLive = res.data.data.length > 0;
+
+    // 🔴 OFFLINE
+    if (!isLive) {
       console.log("⚫ Offline");
       lastLive = false;
-
       if (!force) return;
     }
 
-    // 🔥 PRENDI DATI (anche fake se test)
+    // 🔥 DATI STREAM
     const stream = res.data.data[0] || {
       user_name: STREAMER,
       title: "TEST LIVE",
       game_name: "Just Chatting",
-      viewer_count: 999,
-      thumbnail_url: "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + STREAMER + "-1280x720.jpg"
+      viewer_count: 0,
+      thumbnail_url: `https://static-cdn.jtvnw.net/previews-ttv/live_user_${STREAMER}-1280x720.jpg`
     };
 
-    // 🔥 INVIO
-    if (!lastLive || force) {
-      lastLive = true;
+    // 🚫 evita spam
+    if (lastLive && !force) return;
 
-      const embed = new EmbedBuilder()
-        .setTitle(stream.title)
-        .setURL(`https://twitch.tv/${STREAMER}`)
-        .setDescription('')
-        .addFields(
-          { name: '🎮 Gioco', value: stream.game_name, inline: true },
-          { name: '👀 Viewers', value: stream.viewer_count.toString(), inline: true }
-        )
-        .setImage(stream.thumbnail_url.replace('{width}', '1280').replace('{height}', '720'))
-        .setColor('Purple')
-        .setTimestamp();
+    lastLive = true;
 
-      await channel.send({
-        content: `<:twitch:1488681906101944330>hay <@&${ROLE_ID}> Mi Trovate in live Venite a fare un salto🚨!`,
-        embeds: [embed]
-      });
+    const embed = new EmbedBuilder()
+      .setTitle(stream.title)
+      .setURL(`https://twitch.tv/${STREAMER}`)
+      .addFields(
+        { name: '🎮 Gioco', value: stream.game_name || 'N/A', inline: true },
+        { name: '👀 Viewers', value: String(stream.viewer_count), inline: true }
+      )
+      .setImage(stream.thumbnail_url.replace('{width}', '1280').replace('{height}', '720'))
+      .setColor('Purple')
+      .setTimestamp();
 
-      console.log("✅ NOTIF INVIATA");
-    }
+    await channel.send({
+      content: `<@&${ROLE_ID}> 🔴 **${STREAMER} è in live!**`,
+      embeds: [embed]
+    });
+
+    console.log("✅ NOTIF INVIATA");
 
   } catch (err) {
     console.error("❌ ERRORE TWITCH:", err.response?.data || err.message);
