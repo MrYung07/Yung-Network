@@ -91,7 +91,7 @@ async function checkLive(client, force = false) {
       .setTimestamp();
 
     await channel.send({
-      content: `<@&${ROLE_ID}> 🔴 **${STREAMER} è in live!**`,
+      content: `<:twitch:1488681906101944330>Hay <@&${ROLE_ID}> 🔴 **${STREAMER} è in live!**`,
       embeds: [embed]
     });
 
