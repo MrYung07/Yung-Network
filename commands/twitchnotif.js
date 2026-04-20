@@ -5,7 +5,7 @@ const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
 const TWITCH_CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
 
 const STREAMER = 'mryung07';
-const CHANNEL_ID = '1495849227983519754';
+const CHANNEL_ID = '1495848369283928294';
 const ROLE_ID = '1495849672579875002';
 
 let accessToken = null;
@@ -91,7 +91,7 @@ async function checkLive(client, force = false) {
       .setTimestamp();
 
     await channel.send({
-      content: `<:twitch:1488681906101944330>Hay <@&${ROLE_ID}> 🔴 **${STREAMER} è in live!**`,
+      content: `<:twitch:1488681906101944330>Hey <@&${ROLE_ID}> **${STREAMER}** E in live su Twitch,Vi aspetto :)`,
       embeds: [embed]
     });
 
