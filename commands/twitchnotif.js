@@ -5,8 +5,8 @@ const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
 const TWITCH_CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
 
 const STREAMER = 'mryung07';
-const CHANNEL_ID = '1476526624085250049';
-const ROLE_ID = '1476526581810728970';
+const CHANNEL_ID = '1495849227983519754';
+const ROLE_ID = '1495849672579875002';
 
 let accessToken = null;
 let lastLive = false;
