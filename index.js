@@ -269,11 +269,9 @@ Fare nuove amicizie con persone che condividono la tua passione
 
 **📌 Consigli utili:**
 
-Presentati nel canale <#1486133697651409148>
+Presentati nel canale <#1495840057859248158>
 
-Dai un’occhiata alle regole in <#1476526621539176602> per mantenere il server sicuro e divertente per tutti
-
-Per poter accedere a tutti i canali e unirti alla community, devi completare la verifica. <#1476526613431717950>
+Dai un’occhiata alle regole in <#1495840050351444039> per mantenere il server sicuro e divertente per tutti
 
 Ancora benvenuto/a! Siamo entusiasti di averti con noi! 🌟`)
     .setImage(image)
