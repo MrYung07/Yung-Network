@@ -1,26 +1,24 @@
-YUNG NETWORK — NEWS ADMIN (branch feature/admin-news-supabase)
+YUNG NETWORK — NEWS ADMIN
 
-FILES
-- index.html: homepage aggiornata per leggere le news pubblicate da Supabase
-- news.js: visualizza news pubblicate in homepage
-- admin.html / admin.js: login, crea/modifica/elimina news
-- supabase-config.js: configurazione pubblica da completare
-- supabase-schema.sql: schema e policy Row Level Security
+FILE E DEPLOY
+I file del sito si trovano nella cartella YungNetworksitoWeb.
+La Root Directory di Vercel deve essere impostata su YungNetworksitoWeb.
+Questo aggiornamento serve a far partire un nuovo deploy automatico da GitHub.
+
+PANNELLO NEWS
+- admin.html / admin.js: accesso e gestione delle news.
+- news.js: mostra nella homepage le news pubblicate.
+- supabase-config.js: configurazione pubblica di Supabase.
+- supabase-schema.sql: schema e policy Row Level Security.
 
 CONFIGURAZIONE
-1. Crea un progetto su https://supabase.com/.
-2. In SQL Editor esegui supabase-schema.sql.
-3. In Authentication > Users crea il tuo utente con email e password. Disattiva la registrazione pubblica se non serve.
-4. Copia l'UUID dell'utente e usa la query commentata nel file SQL per inserirlo in public.admin_users.
-5. In Project Settings > API copia Project URL e anon/publishable key in supabase-config.js.
-6. Apri /admin.html, accedi e pubblica una news di prova.
+1. In Supabase SQL Editor esegui supabase-schema.sql.
+2. In Authentication > Users crea l'utente amministratore.
+3. Inserisci l'UUID dell'utente nella tabella public.admin_users.
+4. Verifica Project URL e publishable key in supabase-config.js.
+5. Apri /admin.html e prova a pubblicare una news.
 
 SICUREZZA
-- La chiave anon/publishable è destinata al client; la protezione effettiva è data dalle policy RLS.
-- Non usare MAI la service_role key nel browser o in GitHub.
-- Non abilitare signup pubblico se il pannello deve essere solo tuo.
-- Controlla le policy RLS prima di mettere il sistema in produzione.
-
-VERCEL
-I file sono dentro YungNetworksitoWeb. Verifica che la Root Directory di Vercel punti a quella cartella; altrimenti mantieni i file nella directory effettivamente pubblicata.
-Il codice è su un branch separato: non modifica master finché non apri e unisci una pull request.
+- Non inserire mai la service_role key nel browser o in GitHub.
+- Tieni attive e verifica le policy RLS.
+- Disattiva la registrazione pubblica se il pannello deve essere privato.
