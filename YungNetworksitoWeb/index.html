@@ -12,7 +12,10 @@
    <link rel="icon" href="logoSito.png">
    
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="supabase-config.js" defer></script>
   <script src="script.js" defer></script>
+  <script src="news.js" defer></script>
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -66,11 +69,7 @@
     </section>
 
     <section class="news-section section" id="news"><div class="section-heading reveal"><div><span class="section-kicker">03 / TRASMISSIONI IN ARRIVO</span><h2>ULTIME <span class="gradient-text">NEWS.</span></h2></div><span class="live-label"><i></i> NETWORK FEED</span></div>
-      <div class="news-grid">
-        <article class="news-card news-featured reveal"><div class="news-visual news-visual-one"><span class="news-category">COMMUNITY</span><span class="visual-glyph">✳</span><span class="visual-code">BROADCAST / 001</span></div><div class="news-body"><div class="news-meta"><span>ANNUNCIO</span><span class="news-date">DA AGGIORNARE</span></div><h3>La prossima avventura comincia qui</h3><p>Novità, iniziative e momenti da vivere insieme. Passa sul Discord per scoprire gli aggiornamenti ufficiali.</p><a class="text-link discord-link" href="#discord">LEGGI SUL DISCORD <span>↗</span></a></div></article>
-        <article class="news-card reveal"><div class="news-visual news-visual-two"><span class="news-category">GAMING</span><span class="visual-glyph">⌖</span><span class="visual-code">SQUAD / 002</span></div><div class="news-body"><div class="news-meta"><span>COMMUNITY</span><span class="news-date">DA AGGIORNARE</span></div><h3>Trova la tua prossima squadra</h3><p>Conosci altri player, organizza una sessione e condividi la tua passione per il gaming.</p><a class="text-link discord-link" href="#discord">PARTECIPA <span>↗</span></a></div></article>
-        <article class="news-card reveal"><div class="news-visual news-visual-three"><span class="news-category">CREATOR</span><span class="visual-glyph">◉</span><span class="visual-code">LIVE / 003</span></div><div class="news-body"><div class="news-meta"><span>STREAMING</span><span class="news-date">DA AGGIORNARE</span></div><h3>Clip, live e momenti epici</h3><p>La community è fatta anche dei vostri momenti migliori. Condividili con il network.</p><a class="text-link discord-link" href="#discord">CONDIVIDI <span>↗</span></a></div></article>
-      </div><p class="edit-note">Le news qui presenti sono testi dimostrativi, non notizie verificate. Aggiornale prima della pubblicazione.</p>
+      <div class="news-grid" id="news-grid"><p class="edit-note">Caricamento news dal network…</p></div><p class="edit-note" id="news-status">Le notizie pubblicate dagli amministratori appariranno qui.</p>
     </section>
 
     <section class="join-section" id="discord"><div class="join-grid" aria-hidden="true"></div><div class="join-content reveal"><span class="section-kicker">IL TUO PROSSIMO LIVELLO TI ASPETTA</span><h2>LA RETE È PRONTA.<br><span class="gradient-text">MANCHI SOLO TU.</span></h2><p>Entra nella community, presenta te stesso e trova persone con cui giocare.</p><a class="button button-primary button-large discord-link" href="#discord">◈ ENTRA NEL DISCORD <span class="arrow">↗</span></a><small>Un click per iniziare. La tua prossima squadra potrebbe essere qui.</small></div><div class="join-symbol" aria-hidden="true">YN<span>✳</span></div></section>
