@@ -1,203 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yung Network</title>
-  <link rel="icon" href="logo mio.png">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080610">
+  <meta name="description" content="Yung Network — gaming, streaming e community. Entra nella nostra rete.">
+  <title>YUNGNETWORK — Gaming • Streaming • Community</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+   <link rel="icon" href="logoSito.png">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0d0d0d;
-      color: white;
-    }
-
-    header {
-      background: linear-gradient(90deg, #6a0dad, #bb86fc);
-      padding: 15px;
-      text-align: center;
-      font-size: 24px;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      background: #1a1a1a;
-      padding: 10px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 5px 10px;
-      border-radius: 8px;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      background: #bb86fc;
-      color: black;
-    }
-
-    section {
-      padding: 15px;
-      margin: 10px;
-      border-radius: 15px;
-      background: #1a1a1a;
-      box-shadow: 0 0 15px rgba(106,13,173,0.6);
-    }
-
-    h2 {
-      color: #bb86fc;
-    }
-
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .socials a {
-      font-size: 22px;
-      color: white;
-      transition: 0.3s;
-    }
-
-    .socials a:hover {
-      color: #bb86fc;
-      transform: scale(1.2);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-    }
-
-    .card {
-      background: #262626;
-      padding: 15px;
-      border-radius: 12px;
-      text-align: center;
-      transition: 0.3s;
-    }
-
-    .card img {
-      width: 80px;
-      height: 80px;
-      border-radius: 12px;
-      margin-bottom: 10px;
-      border: 2px solid #bb86fc;
-      object-fit: cover;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 15px #bb86fc;
-    }
-
-    .role {
-      color: #bb86fc;
-      font-weight: bold;
-    }
-
-    .status {
-      margin-top: 5px;
-      font-size: 12px;
-    }
-
-    .online { color: #00ff88; }
-
-    .discord-btn {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 8px 12px;
-      background: #5865F2;
-      border-radius: 810px;
-      color: white;
-      text-decoration: none;
-      transition: 0.3s;
-      align-items: center;
-    }
-
-    .discord-btn:hover {
-      background: #4752c4;
-    }
-
-    footer {
-      text-align: center;
-      padding: 10px;
-      background: #6a0dad;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Yung Network home"><span class="brand-mark">Y<span>N</span></span><span class="brand-name">YUNG<b>NETWORK</b></span></a>
+    <button class="menu-toggle" aria-label="Apri menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="nav" aria-label="Navigazione principale">
+      <a class="nav-link active" href="#home">Home</a><a class="nav-link" href="#community">Community</a><a class="nav-link" href="#staff">Staff</a><a class="nav-link" href="#news">News</a>
+    </nav>
+    <a class="button button-small button-primary discord-link" href="#discord">↗ <span>ENTRA NEL DISCORD</span></a>
+  </header>
 
-<header>
-  💜 Yung Network 
-</header>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-grid" aria-hidden="true"></div><div class="orb orb-one" aria-hidden="true"></div><div class="orb orb-two" aria-hidden="true"></div>
+      <div class="hero-content reveal">
+        <div class="eyebrow"><span class="pulse"></span> GAMING <i>✦</i> STREAMING <i>✦</i> COMMUNITY</div>
+        <h1>NON GIOCARE<br>DA SOLO<span class="period">.</span><br><span class="outline-text">ENTRA NELLA</span><br><span class="gradient-text">RETE.</span></h1>
+        <p class="hero-copy">Non è solo un server. È il punto d'incontro per chi vive il gaming, condivide momenti e crea nuove amicizie. <strong>La prossima partita inizia qui.</strong></p>
+        <div class="hero-actions"><a class="button button-primary discord-link" href="#discord"><span class="discord-symbol">◈</span> ENTRA NEL DISCORD <span class="arrow">↗</span></a><a class="button button-ghost" href="#community">SCOPRI LA COMMUNITY <span>↓</span></a></div>
+        <div class="hero-meta"><span><b class="meta-dot"></b> COMMUNITY ITALIANA</span><span>NESSUN PLAYER LASCIATO INDIETRO</span></div>
+      </div>
+      <div class="hero-art" aria-label="Illustrazione astratta cyberpunk">
+        <div class="art-ring ring-a"></div><div class="art-ring ring-b"></div><div class="art-cross cross-a"></div><div class="art-cross cross-b"></div>
+        <div class="art-core"><div class="core-crown">♛</div><div class="core-title">YUNG<br><span>NETWORK</span></div><div class="core-caption">CONNECT · PLAY · REPEAT</div></div>
+        <div class="floating-tag tag-top"><span class="tag-icon">⌁</span><span><small>SYSTEM STATUS</small><b>READY TO PLAY</b></span><i></i></div>
+        <div class="floating-tag tag-bottom"><span class="tag-icon">✦</span><span><small>YOUR NEXT SQUAD</small><b>IS WAITING FOR YOU</b></span></div>
+        <div class="side-code">YN / 001 — COMMUNITY NETWORK</div>
+      </div>
+      <a class="scroll-cue" href="#community"><span></span> SCROLL PER ESPLORARE</a>
+    </section>
 
-<!-- ABOUT ME -->
-<section id="about">
-  <h2>👤 About Me</h2>
+    <section class="ticker" aria-label="I valori della community"><div class="ticker-track"><span>PLAY TOGETHER</span><b>✳</b><span>LEVEL UP</span><b>✳</b><span>FIND YOUR SQUAD</span><b>✳</b><span>STAY CONNECTED</span><b>✳</b><span>PLAY TOGETHER</span><b>✳</b><span>LEVEL UP</span><b>✳</b><span>FIND YOUR SQUAD</span><b>✳</b><span>STAY CONNECTED</span><b>✳</b></div></section>
 
-  <div class="card">
-    <p>
-      💜 Benvenuto nella <b>Yung Network</b>!<br><br>
-      🎮 Community Gaming & Streaming 🎥Server dedicato a giocatori console e content creator Offriamo:Canali per PlayStation,pc news<br> per streamer Eventi e sessioni di gioco di gruppo Ambiente amichevole e organizzato👉 Unisciti ora e porta il tuo gaming al livello successivo!<br>
-    </p>
+    <section class="section community-section" id="community">
+      <div class="section-heading reveal"><div><span class="section-kicker">01 / IL NOSTRO UNIVERSO</span><h2>UN SOLO NETWORK.<br><span class="gradient-text">MILLE MODI DI GIOCARE.</span></h2></div><p>Che tu giochi per vincere o per divertirti, c'è spazio anche per te.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card feature-discord reveal"><div class="card-top"><span class="feature-icon">◈</span><span class="card-index">SYS.001</span></div><div class="feature-art art-chat" aria-hidden="true"><span>///</span><b>GG</b></div><h3>DISCORD</h3><p>Trova il tuo gruppo, entra in vocale e resta aggiornato su tutto quello che succede nella community.</p><a class="text-link discord-link" href="#discord">UNISCITI ALLA RETE <span>↗</span></a></article>
+        <article class="feature-card feature-play reveal"><div class="card-top"><span class="feature-icon">⌘</span><span class="card-index">SYS.002</span></div><div class="feature-art art-game" aria-hidden="true"><span class="crosshair">+</span><b>PLAY</b></div><h3>GAMING</h3><p>Dal casual al competitivo: organizza partite, conosci nuovi player e trova la squadra giusta.</p><a class="text-link" href="#discord">TROVA IL TUO TEAM <span>↗</span></a></article>
+        <article class="feature-card feature-stream reveal"><div class="card-top"><span class="feature-icon">◉</span><span class="card-index">SYS.003</span></div><div class="feature-art art-stream" aria-hidden="true"><span class="stream-wave">〰</span><b>LIVE</b></div><h3>STREAMING</h3><p>Condividi le tue clip, supporta i creator della community e non perderti i momenti migliori.</p><a class="text-link" href="#news">SCOPRI LE NEWS <span>↗</span></a></article>
+      </div>
+    </section>
 
-    <p class="role">Lo Staff di: Yung Network</p>
-    <!-- SOCIAL -->
-<section id="social">
-  <h2>🌐 Social</h2>
+    <section class="staff-section section" id="staff"><div class="section-heading reveal"><div><span class="section-kicker">02 / LE PERSONE DIETRO LA RETE</span><h2>CONOSCI IL <span class="gradient-text">TEAM.</span></h2></div><p>Una community cresce grazie alle persone. Questi sono i ruoli: personalizza nomi e profili con quelli reali del tuo staff.</p></div>
+      <div class="staff-grid">
+        <article class="staff-card reveal"><div class="staff-avatar avatar-one"><span>YN</span><i>♛</i></div><div class="staff-info"><span class="role role-owner">OWNER</span><h3>YungOwner</h3><p>Visione e direzione della community.</p></div><span class="staff-number">01</span></article>
+        <article class="staff-card reveal"><div class="staff-avatar avatar-two"><span>ZY</span><i>⌁</i></div><div class="staff-info"><span class="role role-admin">ADMIN</span><h3>Nome Admin</h3><p>Organizzazione e supporto.</p></div><span class="staff-number">02</span></article>
+        <article class="staff-card reveal"><div class="staff-avatar avatar-three"><span>BZ</span><i>✳</i></div><div class="staff-info"><span class="role role-mod">MODERATOR</span><h3>Nome Moderatore</h3><p>Un ambiente accogliente per tutti.</p></div><span class="staff-number">03</span></article>
+        <article class="staff-card reveal"><div class="staff-avatar avatar-four"><span>LN</span><i>◉</i></div><div class="staff-info"><span class="role role-mod">MODERATOR</span><h3>Nome Moderatore</h3><p>Presenza e aiuto alla community.</p></div><span class="staff-number">04</span></article>
+      </div><p class="edit-note">✦ I nomi e le iniziali sono segnaposto: sostituiscili con i dati reali dello staff.</p>
+    </section>
 
-  <div style="text-align:center;">
-    <a class="discord-btn" href="social.html" target="_blank">
-      💬 Social Media
-    </a>
-  </div>
-</section>
+    <section class="news-section section" id="news"><div class="section-heading reveal"><div><span class="section-kicker">03 / TRASMISSIONI IN ARRIVO</span><h2>ULTIME <span class="gradient-text">NEWS.</span></h2></div><span class="live-label"><i></i> NETWORK FEED</span></div>
+      <div class="news-grid">
+        <article class="news-card news-featured reveal"><div class="news-visual news-visual-one"><span class="news-category">COMMUNITY</span><span class="visual-glyph">✳</span><span class="visual-code">BROADCAST / 001</span></div><div class="news-body"><div class="news-meta"><span>ANNUNCIO</span><span class="news-date">DA AGGIORNARE</span></div><h3>La prossima avventura comincia qui</h3><p>Novità, iniziative e momenti da vivere insieme. Passa sul Discord per scoprire gli aggiornamenti ufficiali.</p><a class="text-link discord-link" href="#discord">LEGGI SUL DISCORD <span>↗</span></a></div></article>
+        <article class="news-card reveal"><div class="news-visual news-visual-two"><span class="news-category">GAMING</span><span class="visual-glyph">⌖</span><span class="visual-code">SQUAD / 002</span></div><div class="news-body"><div class="news-meta"><span>COMMUNITY</span><span class="news-date">DA AGGIORNARE</span></div><h3>Trova la tua prossima squadra</h3><p>Conosci altri player, organizza una sessione e condividi la tua passione per il gaming.</p><a class="text-link discord-link" href="#discord">PARTECIPA <span>↗</span></a></div></article>
+        <article class="news-card reveal"><div class="news-visual news-visual-three"><span class="news-category">CREATOR</span><span class="visual-glyph">◉</span><span class="visual-code">LIVE / 003</span></div><div class="news-body"><div class="news-meta"><span>STREAMING</span><span class="news-date">DA AGGIORNARE</span></div><h3>Clip, live e momenti epici</h3><p>La community è fatta anche dei vostri momenti migliori. Condividili con il network.</p><a class="text-link discord-link" href="#discord">CONDIVIDI <span>↗</span></a></div></article>
+      </div><p class="edit-note">Le news qui presenti sono testi dimostrativi, non notizie verificate. Aggiornale prima della pubblicazione.</p>
+    </section>
 
-  </div>
-</section>
+    <section class="join-section" id="discord"><div class="join-grid" aria-hidden="true"></div><div class="join-content reveal"><span class="section-kicker">IL TUO PROSSIMO LIVELLO TI ASPETTA</span><h2>LA RETE È PRONTA.<br><span class="gradient-text">MANCHI SOLO TU.</span></h2><p>Entra nella community, presenta te stesso e trova persone con cui giocare.</p><a class="button button-primary button-large discord-link" href="#discord">◈ ENTRA NEL DISCORD <span class="arrow">↗</span></a><small>Un click per iniziare. La tua prossima squadra potrebbe essere qui.</small></div><div class="join-symbol" aria-hidden="true">YN<span>✳</span></div></section>
+  </main>
 
-<!-- STAFF -->
-<section id="staff">
-  <h2>🧑‍💼 Staff</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <img src="logo mio.png" alt="owner">
-      <p class="role">👑 Owner</p>
-    <a class="discord-btn" href="https://discord.com/invite/xCPapWeUFY " target="_blank">
-      💬 Yung Network
-    </a>
-    </div>
-
-    <div class="card">
-      <img src="logo erlama.png" alt="admin">
-      <p class="role">🛠️ Admin</p>
-        <div style="text-align:center;">
-    <a class="discord-btn" href="https://discord.com/invite/xCPapWeUFY " target="_blank">
-      💬 Erlama Network
-    </a>
-    </div>
-
-  </div>
-</section>
-
-<footer>
-  © 2026 Yung Network
-</footer>
-
+  <footer class="footer"><a class="brand footer-brand" href="#home"><span class="brand-mark">Y<span>N</span></span><span class="brand-name">YUNG <b>NETWORK</b></span></a><p>© <span id="year"></span> Yung Network. Costruito per giocare insieme.</p><div class="footer-links"><a href="#home">HOME</a><a href="#community">COMMUNITY</a><a href="#staff">STAFF</a><a href="#news">NEWS</a></div><a class="back-top" href="#home" aria-label="Torna su">↑</a></footer>
+  <div class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
