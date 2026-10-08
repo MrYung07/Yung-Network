@@ -1,3 +1,5 @@
 {
-  "outputDirectory": "YungNetworksitoWeb"
+  "outputDirectory": "YungNetworksitoWeb",
+  "cleanUrls": true,
+  "trailingSlash": false
 }
