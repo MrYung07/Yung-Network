@@ -1,15 +1,18 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const projectRoot = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  root: resolve(__dirname, 'YungNetworksitoWeb'),
+  root: resolve(projectRoot, 'YungNetworksitoWeb'),
   build: {
-    outDir: resolve(__dirname, 'dist'),
+    outDir: resolve(projectRoot, 'dist'),
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'YungNetworksitoWeb/index.html'),
-        admin: resolve(__dirname, 'YungNetworksitoWeb/admin.html')
+        main: resolve(projectRoot, 'YungNetworksitoWeb/index.html'),
+        admin: resolve(projectRoot, 'YungNetworksitoWeb/admin.html')
       }
     }
   }
