@@ -35,3 +35,22 @@ button,a{touch-action:manipulation}
 
 /* Centra la fascia scorrevole dei valori nella pagina iniziale */
 .ticker-track{margin-inline:auto;justify-content:center;width:max-content;min-width:100%;}
+
+
+/* Sezione servizi e contatto Discord */
+.services-section{max-width:none;background:linear-gradient(180deg,#0b0712,#100a19);border-block:1px solid #241631}
+.services-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.service-card{position:relative;min-width:0;padding:26px;background:linear-gradient(145deg,#171022,#0c0913);border:1px solid #342345;border-radius:12px;transition:transform .22s,border-color .22s}
+.service-card:hover{transform:translateY(-4px);border-color:var(--purple)}
+.service-number{font-size:9px;letter-spacing:1.5px;color:#a88bbd}
+.service-icon{display:grid;place-items:center;width:54px;height:54px;margin:22px 0 15px;border:1px solid #654181;border-radius:12px;background:#21132f;color:#dfb9ff;font-size:28px}
+.service-card h3{font:800 25px/1.1 'Barlow Condensed',sans-serif;letter-spacing:.6px;margin:0 0 12px}
+.service-card p{font-size:12px;line-height:1.9;color:var(--muted);margin:0}
+.services-contact{display:flex;align-items:center;justify-content:space-between;gap:28px;margin-top:22px;padding:28px;border:1px solid #57366f;border-radius:12px;background:radial-gradient(ellipse at 90% 10%,#672c8b40,transparent 55%),#110b1b}
+.services-contact h3{font:800 clamp(25px,3vw,36px)/1.1 'Barlow Condensed',sans-serif;margin:10px 0}
+.services-contact p{color:var(--muted);font-size:12px;margin:0}
+.services-discord{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:220px;padding:18px;background:#0b0712;border:1px solid #392448;border-radius:10px}
+.discord-user-label{font-size:9px;letter-spacing:1.5px;color:#a88bbd}
+.services-discord strong{font:800 28px 'Barlow Condensed',sans-serif;color:#fff}
+.services-discord small{font-size:10px;color:var(--muted);line-height:1.5}
+@media(max-width:700px){.services-grid{grid-template-columns:minmax(0,1fr)}.service-card{padding:22px}.service-icon{margin-top:16px}.services-contact{align-items:stretch;flex-direction:column;padding:22px;gap:20px}.services-discord{min-width:0;width:100%}}
