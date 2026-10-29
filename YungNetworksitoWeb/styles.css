@@ -54,3 +54,71 @@ button,a{touch-action:manipulation}
 .services-discord strong{font:800 28px 'Barlow Condensed',sans-serif;color:#fff}
 .services-discord small{font-size:10px;color:var(--muted);line-height:1.5}
 @media(max-width:700px){.services-grid{grid-template-columns:minmax(0,1fr)}.service-card{padding:22px}.service-icon{margin-top:16px}.services-contact{align-items:stretch;flex-direction:column;padding:22px;gap:20px}.services-discord{min-width:0;width:100%}}
+
+/* Restyling ispirato alla landing cyberpunk di riferimento */
+.topbar{height:70px;padding-inline:clamp(18px,6.2vw,100px);gap:22px}
+.brand-mark{font-size:0;width:120px;height:54px;display:block;position:relative;letter-spacing:0}
+.brand-mark:before{content:"YUNG";position:absolute;left:0;top:4px;font:900 italic 31px/.9 'Barlow Condensed',sans-serif;letter-spacing:-2px;color:#fff;text-shadow:2px 2px #a855f7}
+.brand-mark:after{content:"NETWORK";position:absolute;left:19px;top:31px;font:900 italic 17px/.9 'Barlow Condensed',sans-serif;letter-spacing:-.5px;color:#c026ff;transform:skew(-12deg)}
+.brand-name{display:none}
+.nav{gap:clamp(13px,2.3vw,35px)}.nav-link{font-size:11px;font-weight:700}
+.header-socials{display:flex;align-items:center;gap:15px}.header-socials a{font-size:21px;font-weight:800;color:#f5eaff;transition:color .2s,transform .2s}.header-socials a:hover{color:#c026ff;transform:translateY(-2px)}
+.topbar>.discord-link{background:linear-gradient(110deg,#7c14ff,#a000ff);border-radius:10px;padding-inline:19px}
+.hero{min-height:480px;height:min(66vh,620px);padding:50px clamp(22px,13vw,200px);border-bottom:1px solid #18223c;background:radial-gradient(ellipse at 63% 50%,#6413bd38,transparent 48%),linear-gradient(90deg,#03050d 0%,#080512 48%,#05030c 100%)}
+.hero-grid{background-size:42px 42px;opacity:.38;mask-image:linear-gradient(90deg,transparent,#000 42%,#000)}
+.hero-content{width:min(44%,490px);max-width:490px}.hero .eyebrow{font-size:10px;letter-spacing:3px;color:#d7c5ff}
+.hero-brand-title{font:900 italic clamp(60px,7.2vw,102px)/.77 'Barlow Condensed',Impact,sans-serif;letter-spacing:-3px;margin:24px 0 20px;text-shadow:0 0 26px #8b19ff25}
+.hero-lead{font-size:17px;font-weight:800;margin:0 0 2px}.hero-lead strong{color:#d946ef}
+.hero-copy{font-size:11px;line-height:1.65;max-width:370px;color:#d0c7e3;margin:5px 0 17px}
+.hero-actions{margin:19px 0 0}.hero-actions .button{font-size:10px;min-height:43px}
+.hero-art{width:min(63vw,850px);height:100%;aspect-ratio:auto;right:0;top:0;transform:none;display:block;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse at 48% 54%,#8d1cff4d,transparent 40%),repeating-linear-gradient(125deg,transparent 0 30px,#8c24ff0b 31px 32px)}
+.art-ring{inset:8% 15%;border-color:#8d26ff55;transform:rotate(-18deg);border-radius:48%;animation:spin 45s linear infinite}.ring-b{inset:18% 23%;border-color:#ed2bff55}
+.art-cross{width:120%;left:-8%;background:linear-gradient(90deg,transparent,#bd35ff77,transparent)}
+.art-core{position:absolute;left:43%;top:48%;transform:translate(-50%,-50%);width:34%;max-width:300px;background:radial-gradient(circle at 50% 40%,#321447,#05050c 70%);border-color:#c236ff;box-shadow:0 0 100px #9d00ff5c,inset 0 0 50px #9d00ff30}
+.core-title{font-size:clamp(32px,5vw,68px);font-style:italic;text-shadow:0 0 22px #c000ff99}.core-crown{font-size:clamp(30px,4vw,54px)}
+.hero-figure{position:absolute;left:38%;top:7%;width:39%;height:92%;background:linear-gradient(140deg,#05050c,#11091f 45%,#03040b);clip-path:polygon(26% 0,63% 0,79% 15%,91% 45%,100% 100%,0 100%,13% 38%);border-inline:1px solid #a000ff;filter:drop-shadow(0 0 32px #8900ff)}
+.hero-figure:before{content:"";position:absolute;inset:8% 20% 0;background:linear-gradient(110deg,#090711 20%,#1b0b2b 46%,#03040b 72%);clip-path:polygon(28% 0,70% 0,100% 22%,80% 100%,8% 100%,0 25%)}
+.figure-crown{position:absolute;z-index:2;top:35%;left:38%;color:#c22aff;font-size:clamp(40px,6vw,90px);transform:rotate(-12deg);text-shadow:0 0 24px #b400ff}
+.figure-mark{position:absolute;z-index:2;top:48%;left:42%;font:900 italic clamp(30px,5vw,70px) 'Barlow Condensed';color:#e5caff;transform:rotate(-15deg)}
+.hero-slogan{position:absolute;right:5%;top:17%;font:900 italic clamp(24px,3vw,44px)/.95 'Barlow Condensed';color:#d4a1ff;transform:rotate(-7deg);text-shadow:0 0 20px #a000ff55}
+.scroll-cue{left:clamp(22px,13vw,200px);bottom:18px}
+.ticker{display:none}
+.section{padding:44px clamp(22px,6.2vw,95px)}
+.community-section{max-width:none;padding-top:28px;padding-bottom:28px}
+.reference-features{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.reference-features .feature-card{display:flex;align-items:flex-start;gap:14px;min-height:150px;padding:16px;background:linear-gradient(120deg,#080d20dd,#090714ee);border-color:#25335b;isolation:isolate}
+.reference-features .feature-card:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.45;background:radial-gradient(ellipse at 90% 0%,#4425aa,transparent 62%),linear-gradient(135deg,transparent,#041b3b)}
+.reference-icon{flex:0 0 54px;height:54px;display:grid;place-items:center;border:1px solid #8d39ff;border-radius:11px;background:linear-gradient(145deg,#2a0871,#060e24);box-shadow:0 0 20px #7c20ff40;color:#fff;font-size:29px;font-weight:900}
+.playstation-icon{font-size:24px}.pc-icon{color:#70e9ff;border-color:#00bfff}.stream-icon{color:#e6aaff}
+.reference-card-copy{min-width:0}.reference-card-copy h3{font:800 19px/1.1 'Barlow Condensed';margin:5px 0 3px;letter-spacing:.3px}.reference-card-copy>span{display:block;font-size:10px;color:#b879ff}.reference-card-copy p{font-size:9px;line-height:1.6;margin:10px 0 0;color:#d3cce4}.reference-card-copy .text-link{font-size:8px;margin-top:8px}
+.community-dashboard{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.9fr);gap:24px;padding:25px clamp(22px,6.2vw,95px);background:#04070d;border-block:1px solid #121d34}
+.community-dashboard>.section{padding:0;margin:0;min-width:0}
+.community-dashboard .section-heading{margin-bottom:14px;align-items:center}
+.community-dashboard .section-heading h2{font-size:clamp(26px,2.5vw,37px);font-style:italic}
+.community-dashboard .section-kicker{font-size:8px}
+.community-dashboard .section-heading>p{font-size:10px}
+.community-dashboard .staff-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.community-dashboard .staff-card{padding:9px;background:#070b14;border-color:#1c2d51;border-radius:7px}
+.community-dashboard .staff-avatar{height:105px;margin-bottom:9px;border-radius:50%;background:radial-gradient(circle,#371078,#050812 70%);border-color:#293f7b}
+.community-dashboard .staff-avatar span{font-size:32px}
+.community-dashboard .staff-info{text-align:center}.community-dashboard .staff-info h3{font-size:15px}.community-dashboard .staff-info p{display:none}
+.community-dashboard .role{font-size:8px}.community-dashboard .staff-number{display:none}
+.community-dashboard .edit-note{font-size:9px}
+.community-dashboard .news-grid{grid-template-columns:minmax(0,1fr);gap:8px}
+.community-dashboard .news-card{display:grid;grid-template-columns:90px minmax(0,1fr);border:0;border-bottom:1px solid #1b2b48;border-radius:0;background:transparent;padding-bottom:8px}
+.community-dashboard .news-visual{height:66px;border-radius:7px}
+.community-dashboard .news-body{padding:0 0 0 9px}
+.community-dashboard .news-body h3{font-size:14px;margin:3px 0}
+.community-dashboard .news-body p{font-size:9px;line-height:1.45}
+.community-dashboard .news-meta{font-size:8px}
+.community-dashboard .news-category,.community-dashboard .visual-code{display:none}
+.community-dashboard .live-label{font-size:8px}
+.community-dashboard .staff-section{background:transparent;border:0}
+.community-dashboard .news-section{background:transparent}
+.social-section{padding-block:35px}
+.services-section{padding-block:58px}
+.email-contact{display:block;color:#d9b2ff;font-size:11px;overflow-wrap:anywhere;margin-top:4px}
+.footer{padding:18px clamp(18px,6.2vw,95px);background:#03050b}.footer p{line-height:1.8}
+.footer p a{color:#d4a1ff}
+@media(max-width:1050px){.header-socials{display:none}.reference-features{grid-template-columns:repeat(2,minmax(0,1fr))}.community-dashboard{grid-template-columns:minmax(0,1fr);gap:28px}.hero-content{width:48%}.hero-art{width:65vw}}
+@media(max-width:700px){.topbar{height:64px;padding-inline:12px}.brand-mark{width:90px;height:44px}.brand-mark:before{font-size:27px}.brand-mark:after{font-size:14px;top:27px;left:15px}.topbar>.discord-link{padding:9px 11px}.topbar>.discord-link span{display:none}.hero{height:auto;min-height:590px;padding:54px 22px 74px;align-items:flex-start}.hero-content{width:100%;max-width:420px}.hero-brand-title{font-size:clamp(62px,17vw,88px);margin-top:24px}.hero-copy{max-width:320px}.hero-art{width:100%;height:100%;right:-24%;top:0;opacity:.5}.hero-figure{left:38%;width:62%;height:76%;top:16%}.hero-slogan{right:3%;top:30%;font-size:23px}.art-core{left:58%;top:55%;width:53%}.hero .scroll-cue{left:22px}.reference-features{grid-template-columns:minmax(0,1fr);gap:10px}.reference-features .feature-card{min-height:125px}.community-dashboard{padding:28px 18px;gap:30px}.community-dashboard .staff-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.community-dashboard .staff-avatar{height:100px}.community-dashboard .news-card{grid-template-columns:84px minmax(0,1fr)}.community-dashboard .section-heading h2{font-size:32px}.social-section{padding-block:38px}.services-section{padding-block:48px}.footer{gap:14px}}
