@@ -222,3 +222,7 @@ button,a{touch-action:manipulation}
 .brand-logo{display:block;width:clamp(118px,10vw,155px);height:auto;max-height:58px;object-fit:contain;filter:drop-shadow(0 0 9px #8b20ff38)}
 .footer-brand .brand-logo{width:104px;max-height:44px}
 @media(max-width:700px){.brand-logo{width:112px;max-height:48px}.footer-brand .brand-logo{width:92px}}
+
+/* Icone dei social scelti dal pannello admin */
+.social-card>span i{font-size:23px;line-height:1;color:#d9a6ff;filter:drop-shadow(0 0 7px #8b20ff65)}
+.social-card:hover>span i{color:#fff}
