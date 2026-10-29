@@ -143,3 +143,62 @@ button,a{touch-action:manipulation}
 .contact-copy:hover{background:#7418c9}
 .contact-status{font-size:9px;color:#9385a8;line-height:1.6}
 @media(max-width:700px){.services-contact{grid-template-columns:minmax(0,1fr);gap:22px;padding:22px}.services-contact-intro h3{font-size:32px}.services-mini-note{font-size:7px}.contact-method{padding:10px}.contact-method-icon{flex-basis:34px;height:34px}.contact-method strong{font-size:19px}.contact-method a:not(.contact-copy){font-size:10px}}
+
+/* Revisione finale: immagini reali e proporzioni più vicine al riferimento */
+.hero{
+  min-height:382px;height:382px;max-height:none;
+  padding:28px clamp(24px,13vw,200px);
+  background-color:#03050b;
+  background-image:linear-gradient(90deg,#03050bf7 0%,#03050bdc 24%,#03050b66 47%,#03050b16 75%,#03050b75 100%),linear-gradient(0deg,#03050b55,#03050b00 45%,#03050b30),url("https://unimatrixz.com/images/topics/style-aesthetic/midjourney/cyberpunk_0.png");
+  background-position:center,center,center 43%;background-size:cover;background-repeat:no-repeat;
+}
+.hero-grid,.orb,.hero-art{display:none!important}
+.hero-content{width:min(44%,470px);max-width:470px}
+.hero .hero-brand-title{font:900 italic clamp(65px,7.3vw,105px)/.76 'Barlow Condensed',Impact,sans-serif;letter-spacing:-3.5px;margin:21px 0 20px;text-shadow:2px 3px 0 #390b5d,0 0 30px #a100ff45}
+.hero .hero-lead{font-size:17px;line-height:1.3;margin-bottom:5px;color:#fff}
+.hero .hero-copy{max-width:360px;color:#f0eafa;font-size:11px;line-height:1.55;margin:5px 0 16px}
+.hero .hero-actions{gap:12px;margin-top:20px}
+.hero .button{border-radius:9px}
+.hero .scroll-cue{left:50%;transform:translateX(-50%);bottom:13px;display:flex;flex-direction:column;gap:5px;font-size:8px;letter-spacing:1px}
+.hero .scroll-cue span{height:22px;width:17px;border:1px solid #d6c6ff;border-radius:12px;background:transparent;position:relative}
+.hero .scroll-cue span:after{content:"";position:absolute;width:2px;height:5px;top:4px;left:7px;background:#fff;border-radius:2px}
+.reference-features .feature-card{position:relative;overflow:hidden;min-height:150px;border-radius:8px;padding:16px;background-color:#070b16;background-size:cover;background-position:center;isolation:isolate}
+.reference-features .feature-card:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,#03050bf0 0%,#03050bd9 45%,#03050b65 100%);opacity:1}
+.reference-features .feature-discord{background-image:url("https://www.raabtastore.in/assets/gaming-BM1kkWWn.png")}
+.reference-features .feature-play{background-image:url("https://kingspec.usa02.wondercdn.com/uploads/image/656805cb6a818.jpg")}
+.reference-features .feature-pc{background-image:url("https://miro.medium.com/1%2A2mdcfFWfQ91CNubyFvWuBQ.jpeg")}
+.reference-features .feature-stream{background-image:url("https://i1.sndcdn.com/artworks-59D2AtOSIAHhJzJk-Jm3jyA-t500x500.png")}
+.reference-icon{box-shadow:0 0 20px #7c20ff45;backdrop-filter:blur(4px)}
+.community-dashboard{padding:22px clamp(22px,6.2vw,95px);grid-template-columns:minmax(0,1.04fr) minmax(0,.9fr);gap:24px}
+.community-dashboard .staff-section,.community-dashboard .news-section{min-width:0}
+.community-dashboard .section-heading h2{font-style:italic;font-size:clamp(25px,2.2vw,35px)}
+.community-dashboard .staff-card{min-height:164px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:10px 7px;background:linear-gradient(180deg,#080d1c,#05070d);border:1px solid #24365e;border-radius:7px}
+.community-dashboard .staff-avatar{width:82px;height:82px;min-height:82px;aspect-ratio:1;flex-shrink:0;overflow:hidden;border-radius:50%;margin-bottom:8px;background:radial-gradient(circle at 50% 35%,#5d169d,#0a0c19 72%);border:1px solid #7c3aed;box-shadow:0 0 16px #7c3aed35}
+.community-dashboard .staff-avatar span{font:900 24px 'Barlow Condensed';color:#e5ccff}
+.community-dashboard .staff-avatar i{font-size:15px}
+.community-dashboard .staff-info h3{font-size:14px;margin:3px 0}
+.community-dashboard .staff-info .role{font-size:8px}
+.community-dashboard .news-card{grid-template-columns:98px minmax(0,1fr);gap:10px}
+.community-dashboard .news-visual{height:68px;overflow:hidden}
+.community-dashboard .news-body h3{font-size:13px}
+.community-dashboard .news-body p{font-size:9px}
+.services-section{border-top:1px solid #18233c}
+@media(max-width:1050px){
+ .hero{height:410px;min-height:410px;padding:32px 6vw;background-position:center,center,58% center}
+ .hero-content{width:48%}
+ .community-dashboard{grid-template-columns:minmax(0,1fr);gap:28px}
+}
+@media(max-width:700px){
+ .hero{height:auto;min-height:560px;padding:58px 22px 75px;background-image:linear-gradient(90deg,#03050beF 0%,#03050bc9 55%,#03050b50 100%),linear-gradient(0deg,#03050b90,transparent 50%),url("https://unimatrixz.com/images/topics/style-aesthetic/midjourney/cyberpunk_0.png");background-position:center,center,60% center}
+ .hero-content{width:100%;max-width:370px}
+ .hero .hero-brand-title{font-size:clamp(68px,18vw,90px)}
+ .hero .hero-lead{font-size:16px}
+ .hero .hero-copy{max-width:315px;font-size:11px}
+ .hero .scroll-cue{left:50%;bottom:12px}
+ .reference-features{grid-template-columns:minmax(0,1fr)}
+ .reference-features .feature-card{min-height:132px}
+ .community-dashboard{padding:28px 18px}
+ .community-dashboard .staff-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .community-dashboard .staff-avatar{width:80px;height:80px;min-height:80px}
+ .community-dashboard .news-card{grid-template-columns:84px minmax(0,1fr)}
+}
