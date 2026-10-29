@@ -217,3 +217,8 @@ button,a{touch-action:manipulation}
   background-position: center;
   background-repeat: no-repeat;
 }
+
+/* Logo ufficiale vettoriale del brand */
+.brand-logo{display:block;width:clamp(118px,10vw,155px);height:auto;max-height:58px;object-fit:contain;filter:drop-shadow(0 0 9px #8b20ff38)}
+.footer-brand .brand-logo{width:104px;max-height:44px}
+@media(max-width:700px){.brand-logo{width:112px;max-height:48px}.footer-brand .brand-logo{width:92px}}
